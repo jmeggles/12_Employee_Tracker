@@ -30,6 +30,7 @@
   "homepage": "https://github.com/jmeggles/12_Employee_Tracker#readme",
   "dependencies": {
     "chalk": "^4.1.0",
+    "easy-table": "^1.1.1",
     "inquirer": "^7.3.2",
     "mysql": "^2.18.1"
   }
