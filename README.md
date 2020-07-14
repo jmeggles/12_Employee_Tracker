@@ -1,4 +1,4 @@
- # Project Name ![GitHub deployments](https://img.shields.io/github/deployments/badges/shields/shields-staging?color=lightgrey)
+ # Project Name ![GitHub deployments](https://img.shields.io/github/deployments/badges/shields/shields-staging?color=pink) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/chalk?style=plastic)
   Employee Tracker
 
   ## Overview 
