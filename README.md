@@ -47,7 +47,7 @@
   Clone repo from guthub and intall node modules, inquirer, chalk, console.table, and mysql inside project folder.  Use 'node server.js' in terminal to activate project. Follow prompts to view employee info.  Also can be accessed with DBeaver.
 
   ## Benefit
-  Anyone can benefit from this project from business owners to stay at home moms and dads.  It can be used to organize any information for quick searches such as employees and thier department info plu slary info to collectibles using serial numbers and date of purchase. 
+  Anyone can benefit from this project from business owners to stay at home moms and dads.  It can be used to organize any information for quick searches such as employees and thier department info plu slary info to collectibles using serial numbers and date of purchase. The information can easily be adjusted to suit any project.
 
   ## License 
   ![APM](https://img.shields.io/apm/l/npm?color=pink&style=plastic)
