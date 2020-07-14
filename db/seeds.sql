@@ -1,11 +1,11 @@
-INSERT INTO employee (id, firstName, lastName, roleEmpl, department)
-VALUES ("vanilla", 2.50, 100);
+INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
+VALUES ("123", "John", "Doe", 1446337, 0221453)
 
-INSERT INTO role (nameEmpl, roleEmpl, department)
-VALUES ("chocolate", 3.10, 120);
+INSERT INTO role (title, salary, deptId)
+VALUES ("Supervisor", 90159.25, 5);
 
-INSERT INTO department (nameEmpl, roleEmpl, department)
-VALUES ("strawberry", 3.25, 75);
+INSERT INTO department (id, deptName)
+VALUES ("5", "Operations");
 
 SELECT count(*) FROM authors;
 -- ### Alternative way to insert more than one row
