@@ -22,7 +22,8 @@ CREATE TABLE employee (
 CREATE TABLE role (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(30) NULL,
-  salary DECIMAL NULL,
+  -- salary decimal is 9 total digits including the 2 decimal spaces. 
+  salary DECIMAL(9,2) NULL,
   deptId INT NULL
 );
 
