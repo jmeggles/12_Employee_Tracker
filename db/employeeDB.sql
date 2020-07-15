@@ -1,10 +1,10 @@
 -- erases and rewrites database when new info below is added (no needd to delete and open new DB).
 DROP DATABASE IF EXISTS employeeDB;
 
--- create this DB.
+-- creates the DB.
 CREATE DATABASE employeeDB;
 
--- use this DB name.
+-- assigned DB name.
 USE employeeDB;
 
 -- first table is employee with five columns id, fname, lname, role, mgrId.

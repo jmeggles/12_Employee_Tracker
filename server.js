@@ -58,11 +58,12 @@ function start() {
     .prompt({
       name: "start",
       type: "list",
-      message: "What would you like to view: ",
+      message: "Menu options: ",
       choices: [
-        "Employee", 
-        "Role",
-        "Department", 
+        "View all employees", 
+        "View employees by role",
+        "View employees by department",
+        "View employees by manager", 
         "Exit"
       ]
     })
