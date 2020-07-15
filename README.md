@@ -32,16 +32,12 @@
   ## Installation 
   ![npm](https://img.shields.io/npm/v/npm?color=pink&style=plastic) ![npm](https://img.shields.io/npm/v/inquirer?color=pink&label=inquirer&style=plastic)
   - DBeaver
-  
-  - npm dependencies and devDependencies
-    - MySQL
-    - Control.Table
-    - Inquirer
-    - Chalk
-    
-  - Languages
-    - JavScript
-    - NodeJs
+  - MySQL
+  - Control.Table
+  - Inquirer
+  - Chalk
+  - JavScript
+  - Node.Js
 
   ## How_to_use
   Clone repo from guthub and intall node modules, inquirer, chalk, console.table, and mysql inside project folder.  Use 'node server.js' in terminal to activate project. Follow prompts to view employee info.  Also can be accessed with DBeaver.
