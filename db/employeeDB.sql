@@ -15,8 +15,8 @@ CREATE TABLE employee (
   firstName VARCHAR(30) NOT NULL,
   lastName VARCHAR(30) NOT NULL,
   roleId INT NOT NULL,
-  mgrId INT NOT NULL
-  
+  mgrId INT NOT NULL,
+  PRIMARY KEY(id)
 );
 
 -- another table called role with four columns id, title, salary, deptId.
@@ -26,12 +26,14 @@ CREATE TABLE role (
   -- salary decimal is 9 total digits including the 2 decimal spaces. 
   salary DECIMAL(9,2) NULL,
   deptId INT NULL
+  PRIMARY KEY(id)
 );
 
 -- another table called department with two columns, id and dept name.
 CREATE TABLE department (
   id INT AUTO_INCREMENT PRIMARY KEY,
   deptName VARCHAR(30) NULL
+  PRIMARY KEY(id)
 );
 
 
