@@ -16,6 +16,7 @@ CREATE TABLE employee (
   lastName VARCHAR(30) NOT NULL,
   roleId INT NOT NULL,
   mgrId INT NOT NULL
+  
 );
 
 -- another table called role with four columns id, title, salary, deptId.
