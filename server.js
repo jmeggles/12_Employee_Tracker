@@ -96,7 +96,9 @@ function start() {
     })
 }
 
-// if add new employee is selected... 
+// if add new employee is selected...
+// this works when new employee is selected from the menu list.
+// does not save or send info after inputs though. 
 function newEmployee() {
   inquirer
     .prompt([
