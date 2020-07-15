@@ -3,7 +3,7 @@
 
 -- employee info
 INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
-VALUES (1, "John", "Doe", 52, NULL);
+VALUES (1, "Robert", "Mason", 52, NULL);
 
 INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
 VALUES (2, "Jane", "Duet", 51, 52);
@@ -18,19 +18,19 @@ INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
 VALUES (5, "Zack", "Karl", 50, 51);
 
 INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
-VALUES (6, "John", "Doe", 51, 52);
+VALUES (6, "Jillian", "Mullins", 51, 52);
 
 INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
-VALUES (7, "Jane", "Duet", 50, 51);
+VALUES (7, "Lisa", "Dawn", 50, 51);
 
 INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
-VALUES (8, "Adam", "Bradley", 50, 51);
+VALUES (8, "Curtis", "Jeffery", 50, 51);
 
 INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
-VALUES (9, "Mary", "Handler", 50, 51);
+VALUES (9, "Steve", "Humperdink", 50, 51);
 
 INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
-VALUES (10, "Zack", "Karl", 50, 52);
+VALUES (10, "Jon", "Doh", 50, 52);
 
 
 -- role info
@@ -60,7 +60,7 @@ VALUES (22, "Feeders");
 
 -- -- select returns the values
 -- SELECT count(*) FROM employee;
--- SELECT firstName from employee
+SELECT * FROM employee
 
 
 

@@ -68,10 +68,10 @@ function start() {
         "Exit"
       ]
     })
-    // depending on which title is chosen, the next set of required info will be asked.
-    .then(({ start }) => {
+    // depending on which menu list is chosen, the next set of required info will be asked.
+    .then(({ menu }) => {
 
-      switch (start) {
+      switch (menu) {
         // if employee is selected...or...
         case "Employee":
           employee();
@@ -86,23 +86,21 @@ function start() {
         case "Department":
           department();
           break;
-
+        // if add new empl is selected...or...
         case "Add new employee":
           newEmployee();
           break;
 
-        // if no more employees selected. 
+        // if user chooses to exit application. 
         case "Exit":
           exit()
           break
       }
     })
+}
 
-
-// >>>>>  will be using this to add new employees<<<<<<<<<<<< //
-
-// if employee is selected... 
-function employee() {
+// if add new employee is selected... 
+function newEmployee() {
   inquirer
     .prompt([
       {
@@ -126,14 +124,15 @@ function employee() {
         message: "Employee's manager's ID?"
       },
     ])
-  }     
-}  
-//     // answers are written to the markdown file
-//     .then(({ mgrName, mgrId, mgrEmail, mgrPhone }) => {
-//       // collects all inputs
-//       const manager = new Manager(mgrName, mgrId, mgrEmail, mgrPhone);
-//       employees.push(manager);
+    
+ 
+//     // answers are written to database
+    .then(({ mgrName, mgrId, mgrEmail, mgrPhone }) => {
+      
+      // collects all inputs
+      const manager = new Manager(mgrName, mgrId, mgrEmail, mgrPhone);
+      employees.push(manager);
 
-//       createCard();
-//     })
-// }
+      createCard();
+    })
+}
