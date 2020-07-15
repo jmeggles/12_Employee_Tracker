@@ -56,14 +56,15 @@ function start() {
 function start() {
   inquirer
     .prompt({
-      name: "start",
+      name: "menu",
       type: "list",
       message: "What would you like to do? ",
       choices: [
         "View all employees", 
         "View employees by role",
         "View employees by department",
-        "View employees by manager", 
+        "View employees by manager",
+        "Add new employee", 
         "Exit"
       ]
     })
@@ -86,45 +87,47 @@ function start() {
           department();
           break;
 
+        case "Add new employee":
+          newEmployee();
+          break;
+
         // if no more employees selected. 
         case "Exit":
           exit()
           break
       }
     })
-}
 
 
+// >>>>>  will be using this to add new employees<<<<<<<<<<<< //
 
-// >>>>>  this is to input info...not needed for this <<<<<<<<<<<< //
-
-// // if employee is selected... 
-// function employee() {
-//   inquirer
-//     .prompt([
-//       {
-//         type: "input",
-//         name: "firstName",
-//         message: "Employee's first name?"
-//       },
-//       {
-//         type: "input",
-//         name: "lastName",
-//         message: "Employee's last name?"
-//       },
-//       {
-//         type: "input",
-//         name: "roleId",
-//         message: "Employee's role ID?"
-//       },
-//       {
-//         type: "input",
-//         name: "mgrId",
-//         message: "Employee's manager's ID?"
-//       }
-//     ])
-//   }     
-
+// if employee is selected... 
+function employee() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "firstName",
+        message: "Employee's first name?"
+      },
+      {
+        type: "input",
+        name: "lastName",
+        message: "Employee's last name?"
+      },
+      {
+        type: "input",
+        name: "roleId",
+        message: "Employee's role ID?"
+      },
+      {
+        type: "input",
+        name: "mgrId",
+        message: "Employee's manager's ID?"
+      },
+    ])
+  }     
+}  
 //     // answers are written to the markdown file
 //     .then(({ mgrName, mgrId, mgrEmail, mgrPhone }) => {
 //       // collects all inputs
