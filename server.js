@@ -56,13 +56,13 @@ function start() {
 function start() {
   inquirer
     .prompt({
-      name: "list",
-      type: "start",
-      message: "What would you like to view: Employee, Role, or Department?",
+      name: "start",
+      type: "list",
+      message: "What would you like to view: ",
       choices: [
-        "employee", 
-        "role",
-        "department", 
+        "Employee", 
+        "Role",
+        "Department", 
         "Exit"
       ]
     })
@@ -117,13 +117,14 @@ function employee() {
         message: "Employee's manager's ID?"
       }
     ])
-    
-    // answers are written to the markdown file
-    .then(({ mgrName, mgrId, mgrEmail, mgrPhone }) => {
-      // collects all inputs
-      const manager = new Manager(mgrName, mgrId, mgrEmail, mgrPhone);
-      employees.push(manager);
+  }     
 
-      createCard();
-    })
-}
+//     // answers are written to the markdown file
+//     .then(({ mgrName, mgrId, mgrEmail, mgrPhone }) => {
+//       // collects all inputs
+//       const manager = new Manager(mgrName, mgrId, mgrEmail, mgrPhone);
+//       employees.push(manager);
+
+//       createCard();
+//     })
+// }
