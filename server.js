@@ -71,17 +71,17 @@ function start() {
       switch (menu) {
         // if employee is selected...or...
         case "Employee":
-          employee();
+          byEmpl();
           break;
 
         // if role is selected...or...
         case "Role":
-          role();
+          byRole();
           break;
 
         // if department is selected...or...
         case "Department":
-          department();
+          byDept();
           break;
         // if add new empl is selected...or...
         case "Add new employee":
@@ -134,7 +134,7 @@ function newEmployee() {
     })
 }
 
-function start() {
+function byEmpl() {
   connection.query("SELECT * FROM employees ORDER BY id", function (error, results) {
       if (error) throw error;
      console.table(results);
@@ -143,7 +143,7 @@ function start() {
      connection.end();
     });
 }
-function start() {
+function byRole() {
   connection.query("SELECT * FROM role ORDER BY id", function (error, results) {
       if (error) throw error;
      console.table(results);
@@ -152,7 +152,7 @@ function start() {
      connection.end();
     });
 }
-function start() {
+function byDept() {
   connection.query("SELECT * FROM department ORDER BY id", function (error, results) {
       if (error) throw error;
      console.table(results);
