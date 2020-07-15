@@ -93,32 +93,37 @@ function start() {
       }
     })
 }
-// if employee is selected... 
-function employee() {
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "firstName",
-        message: "Employee's first name?"
-      },
-      {
-        type: "input",
-        name: "lastName",
-        message: "Employee's last name?"
-      },
-      {
-        type: "input",
-        name: "roleId",
-        message: "Employee's role ID?"
-      },
-      {
-        type: "input",
-        name: "mgrId",
-        message: "Employee's manager's ID?"
-      }
-    ])
-  }     
+
+
+
+// >>>>>  this is to input info...not needed for this <<<<<<<<<<<< //
+
+// // if employee is selected... 
+// function employee() {
+//   inquirer
+//     .prompt([
+//       {
+//         type: "input",
+//         name: "firstName",
+//         message: "Employee's first name?"
+//       },
+//       {
+//         type: "input",
+//         name: "lastName",
+//         message: "Employee's last name?"
+//       },
+//       {
+//         type: "input",
+//         name: "roleId",
+//         message: "Employee's role ID?"
+//       },
+//       {
+//         type: "input",
+//         name: "mgrId",
+//         message: "Employee's manager's ID?"
+//       }
+//     ])
+//   }     
 
 //     // answers are written to the markdown file
 //     .then(({ mgrName, mgrId, mgrEmail, mgrPhone }) => {
