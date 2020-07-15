@@ -5,10 +5,10 @@ const mysql = require("mysql");
 const inquirer = require("inquirer");
 
 // prints tables to the console
-const console = require("console.table");
+//console.table = require("console.table");
 
 // prints console info in different colors for better viewing.
-const chalk = require("chalk");
+// const chalk = require("chalk");
 
 // creates the connection
 const connection = mysql.createConnection({
@@ -25,31 +25,24 @@ const connection = mysql.createConnection({
   database: "employeeDB"
 });
 
-// connection.connect(function(err) {
-//   if (err) throw err;
-//   console.log("connected as id " + connection.threadId);
-//   connection.end();
-// });
-
-
 // connect to the mysql server and sql database
-connection.connect(function(err) {
+connection.connect(function (err) {
   // in the callback, if we get an error, wrong info is used
   if (err) throw err;
   // run the start function after the connection is made to prompt the user
   start();
-  });
+});
 
 // prompts user with the intial question 
-function start() {
-  connection.query("SELECT * FROM employees", function (error, results) {
-      if (error) throw error;
-     console.table(results);
+// function start() {
+//   connection.query("SELECT * FROM employees", function (error, results) {
+//     if (error) throw error;
+//     console.table(results);
 
-    // pending queries are sent and connection is terminated
-     connection.end();
-    });
-}
+//     // pending queries are sent and connection is terminated
+//     // connection.end();
+//   });
+// }
 
 function start() {
   inquirer
@@ -58,11 +51,16 @@ function start() {
       type: "list",
       message: "What would you like to do? ",
       choices: [
-        "View all employees", 
-        "View employees by role",
-        "View employees by department",
-        "View employees by manager",
-        "Add new employee", 
+        "View all employees",
+        "View all departments",
+        "View all roles",
+        // "View employees by role",
+        // "View employees by department",
+        // "View employees by manager",
+        "Add new employee",
+        "Add new department",
+        "Add new role",
+        "Update employee role",
         "Exit"
       ]
     })
@@ -70,25 +68,37 @@ function start() {
     .then(({ menu }) => {
       switch (menu) {
         // if employee is selected...or...
-        case "Employee":
-          byEmpl();
+        case "View all employees":
+          allEmpl();
           break;
 
         // if role is selected...or...
-        case "Role":
-          byRole();
+        case "View all roles":
+          allRole();
           break;
 
         // if department is selected...or...
-        case "Department":
-          byDept();
+        case "View all departments":
+          allDept();
           break;
+
         // if add new empl is selected...or...
         case "Add new employee":
           newEmployee();
           break;
 
-        // if user chooses to exit application. 
+        case "Add new department":
+          newDepartment();
+          break;
+
+        case "Add new role":
+          newRole();
+          break;
+
+        case "Update employee role":
+          updateEmployeeRole();
+          break;
+
         case "Exit":
           exit()
           break
@@ -123,43 +133,96 @@ function newEmployee() {
         message: "Employee's manager's ID?"
       },
     ])
-    
- 
-//     // answers are written to database
-    .then(({ mgrName, mgrId, mgrEmail, mgrPhone }) => {
-      
-      // collects all inputs
-      const manager = new Manager(mgrName, mgrId, mgrEmail, mgrPhone);
-      employees.push(manager);
 
-      createNewEmplyee();
+
+    //     // answers are written to database
+    .then(({ mgrName, mgrId, mgrEmail, mgrPhone }) => {
+
+      // collects all inputs
+
+      console.table(results);
+
     })
 }
 
-function byEmpl() {
-  connection.query("SELECT * FROM employees ORDER BY id", function (error, results) {
-      if (error) throw error;
-     console.table(results);
+function newDepartment() {
 
-    // pending queries are sent and connection is terminated
-     connection.end();
-    });
 }
-function byRole() {
-  connection.query("SELECT * FROM role ORDER BY id", function (error, results) {
-      if (error) throw error;
-     console.table(results);
 
-    // pending queries are sent and connection is terminated
-     connection.end();
-    });
+function newRole() {
+
 }
-function byDept() {
-  connection.query("SELECT * FROM department ORDER BY id", function (error, results) {
-      if (error) throw error;
-     console.table(results);
 
-    // pending queries are sent and connection is terminated
-     connection.end();
-    });
+function updateEmployeeRole() {
+
+}
+
+function allEmpl() {
+  let qry = "SELECT "
+
+  qry += "E.id as EmployeeId, "
+  qry += "E.firstName as EmployeeFirstName, "
+  qry += "E.lastName as EmployeeLastName, "
+  qry += "E.mgrId as ManagerId, "
+  qry += "E.roleId, "
+
+  qry += "R.deptId, "
+  qry += "R.title, "
+  qry += "R.salary, "
+
+  qry += "D.deptName, "
+
+  qry += "M.firstName as ManagerFirstName, "
+  qry += "M.lastName as ManagerLastName "
+  
+  qry += "FROM employee E "
+
+  qry += "JOIN role R "
+  qry += "ON E.roleId = R.id "
+
+  qry += "JOIN department D "
+  qry += "ON R.deptId = D.id "
+
+  qry += "JOIN employee M "
+  qry += "ON E.mgrId = M.id "
+
+  connection.query(qry, function (error, results) {
+    if (error) throw error;
+    console.table(results);
+    start()
+  });
+}
+
+
+function allRole() {
+  let qry = "SELECT "
+
+  qry += "R.deptId, "
+  qry += "R.title, "
+  qry += "R.salary, "
+  
+  qry += "D.deptName "
+  
+  qry += "FROM role R "
+  
+  qry += "JOIN department D "
+  qry += "ON R.deptId = D.id "
+  
+  connection.query(qry, function (error, results) {
+    if (error) throw error;
+    console.table(results);
+    start()
+  });
+}
+
+function allDept() {
+  connection.query("SELECT * FROM department", function (error, results) {
+    if (error) throw error;
+    console.table(results);
+    start()
+  });
+}
+
+function exit() {
+  connection.end()
 }
