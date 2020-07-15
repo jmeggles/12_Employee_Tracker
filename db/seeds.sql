@@ -2,36 +2,35 @@
 -- user will be able to search for employees by employee, role or department.
 
 -- employee info
-INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
+INSERT INTO employee (id, firstName, lastName, employeeId, mgrId)
 VALUES (1, "Robert", "Mason", 52, NULL);
 
-INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
+INSERT INTO employee (id, firstName, lastName, employeeId, mgrId)
 VALUES (2, "Jane", "Duet", 51, 52);
 
-INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
+INSERT INTO employee (id, firstName, lastName, employeeId, mgrId)
 VALUES (3, "Adam", "Bradley", 52, NULL);
 
-INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
+INSERT INTO employee (id, firstName, lastName, employeeId, mgrId)
 VALUES (4, "Mary", "Handler", 50, 51);
 
-INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
+INSERT INTO employee (id, firstName, lastName, employeeId, mgrId)
 VALUES (5, "Zack", "Karl", 50, 51);
 
-INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
+INSERT INTO employee (id, firstName, lastName, employeeId, mgrId)
 VALUES (6, "Jillian", "Mullins", 51, 52);
 
-INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
+INSERT INTO employee (id, firstName, lastName, employeeId, mgrId)
 VALUES (7, "Lisa", "Dawn", 50, 51);
 
-INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
+INSERT INTO employee (id, firstName, lastName, employeeId, mgrId)
 VALUES (8, "Curtis", "Jeffery", 50, 51);
 
-INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
+INSERT INTO employee (id, firstName, lastName, employeeId, mgrId)
 VALUES (9, "Steve", "Humperdink", 50, 51);
 
-INSERT INTO employee (id, firstName, lastName, roleId, mgrId)
+INSERT INTO employee (id, firstName, lastName, employeeId, mgrId)
 VALUES (10, "Jon", "Doh", 50, 52);
-
 
 -- role info
 INSERT INTO role (id, title, salary, deptId)
@@ -42,9 +41,6 @@ VALUES (51, "Supervisor", 80500.50, 21);
 
 INSERT INTO role (id, title, salary, deptId)
 VALUES (52, "Manager", 100100.25, 22);
-
-
-
 
 -- department info
 INSERT INTO department (id, deptName)
