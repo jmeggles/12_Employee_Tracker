@@ -51,7 +51,7 @@ function start() {
     });
 
 
-     
+// at start, prompts user with a list of menu items to choose from using inquirer
 }
 function start() {
   inquirer
