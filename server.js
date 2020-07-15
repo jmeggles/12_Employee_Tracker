@@ -42,17 +42,15 @@ connection.connect(function(err) {
 
 // prompts user with the intial question 
 function start() {
-  connection.query("SELECT * from employees", function (error, results) {
+  connection.query("SELECT * FROM employees", function (error, results) {
       if (error) throw error;
      console.table(results);
 
     // pending queries are sent and connection is terminated
      connection.end();
     });
-
-
-     
 }
+
 function start() {
   inquirer
     .prompt({
@@ -70,7 +68,6 @@ function start() {
     })
     // depending on which menu list is chosen, the next set of required info will be asked.
     .then(({ menu }) => {
-
       switch (menu) {
         // if employee is selected...or...
         case "Employee":
@@ -133,6 +130,34 @@ function newEmployee() {
       const manager = new Manager(mgrName, mgrId, mgrEmail, mgrPhone);
       employees.push(manager);
 
-      createCard();
+      createNewEmplyee();
     })
+}
+
+function start() {
+  connection.query("SELECT * FROM employees ORDER BY id", function (error, results) {
+      if (error) throw error;
+     console.table(results);
+
+    // pending queries are sent and connection is terminated
+     connection.end();
+    });
+}
+function start() {
+  connection.query("SELECT * FROM role ORDER BY id", function (error, results) {
+      if (error) throw error;
+     console.table(results);
+
+    // pending queries are sent and connection is terminated
+     connection.end();
+    });
+}
+function start() {
+  connection.query("SELECT * FROM department ORDER BY id", function (error, results) {
+      if (error) throw error;
+     console.table(results);
+
+    // pending queries are sent and connection is terminated
+     connection.end();
+    });
 }
