@@ -7,15 +7,14 @@ CREATE DATABASE employeeDB;
 -- assigned DB name.
 USE employeeDB;
 
--- first table is employee with five columns id, fname, lname, role, mgrId.
 -- auto-increment automatically generates sequential numeric values every time that a record is inserted into a table.
 -- null means unknown these columns can acceept unknown values while not null cannot accept unknown values and must have an input.
-CREATE TABLE employee (
+-- must use department, role, employee in that order in mysql for code to work
+
+-- another table called department with two columns, id and dept name.
+CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT,
-  firstName VARCHAR(30) NOT NULL,
-  lastName VARCHAR (30) NOT NULL,
-  roleId INT NOT NULL,
-  mgrId VARCHAR(30) NULL,
+  deptName VARCHAR(30) NULL,
   PRIMARY KEY (id)
 );
 
@@ -25,12 +24,18 @@ CREATE TABLE role (
   title VARCHAR(30) NULL,
   salary DECIMAL(10,2) NULL,
   deptId INT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  FOREIGN KEY (deptId) REFERENCES department (id)
 );
 
--- another table called department with two columns, id and dept name.
-CREATE TABLE department (
+-- first table is employee with five columns id, fname, lname, role, mgrId.
+CREATE TABLE employee (
   id INT NOT NULL AUTO_INCREMENT,
-  deptName VARCHAR(30) NULL,
-  PRIMARY KEY (id)
+  firstName VARCHAR(30) NOT NULL,
+  lastName VARCHAR (30) NOT NULL,
+  roleId INT NOT NULL,
+  mgrId INT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (roleId) REFERENCES role (id),
+  FOREIGN KEY (mgrId) REFERENCES employee (id)
 );
