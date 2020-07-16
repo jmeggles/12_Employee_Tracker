@@ -97,100 +97,155 @@ function start() {
 // this works when new employee is selected from the menu list.
 // does not save or send info after inputs though. 
 function newEmployee() {
-  let roleArray = [];
-  let mgrArray = [];
+  connection.query("SELECT * FROM role", function (err, res) {
+  if (err) throw err;
+  
   inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "firstName",
-        message: "Employee's first name?"
-      },
-      {
-        type: "input",
-        name: "lastName",
-        message: "Employee's last name?"
-      },
-      {
-        type: "input",
-        name: "roleId",
-        message: "Employee's role ID?"
-      },
-      {
-        type: "input",
-        name: "mgrId",
-        message: "Employee's manager's ID?"
-      },
-    ])
-    //     // answers are written to database
-    .then(({ roleArrar, mgrArray }) => {
-      // collects all inputs
-      console.table(results);
-    })
+      .prompt([
+          {
+              name: "firstName",
+              type: "input", 
+              message: "Enter employee's fist name: ",
+          },
+          {
+              name: "lastName",
+              type: "input", 
+              message: "Enter employee's last name: "
+          },
+          {
+              name: "role", 
+              type: "list",
+              message: "Select employee's role: ",
+              choices: function() {
+              var emplArr = [];
+              for (let i = 0; i < res.length; i++) {
+                  emplArr.push(res[i].title);
+              }
+              return emplArr;
+              },
+           
+          }
+          ])
+          .then(function (answer) {
+              let roleId;
+              for (let j = 0; j < res.length; j++) {
+              if (res[j].title == answer.role) {
+                  roleId = res[j].id;
+                  console.log(roleId)
+              }                  
+              }  
+              connection.query(
+              "INSERT INTO employee SET ?",
+              {
+                  firstName: answer.firstName,
+                  lastName: answer.lastName,
+                  roleId: roleId,
+              },
+              function (err) {
+                  if (err) throw err;
+                  console.log("Success! Employee added.");
+                  start();
+              }
+              )
+          })
+  })
 }
 
 function newDepartment() {
   inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "deptName",
-        message: "Name of new department?"
-      },
-    ])
-    //     // answers are written to database
-    .then(({  }) => {
-      // collects all inputs
-      console.table(results);
-    })
-}
-
-function newRole() {
-  inquirer
   .prompt([
-    {
-      type: "input",
-      name: "title",
-      message: "Name of role (title)?"
-    },
-    {
-      type: "input",
-      name: "salary",
-      message: "What is the salary for this role?"
-    },
-    {
-      type: "input",
-      name: "deptId",
-      message: "What is the department ID?"
-    },
-
-  ])
-  //     // answers are written to database
-  .then(({ }) => {
-    // collects all inputs
-    console.table(results);
+      {
+          name: "newDept", 
+          type: "input", 
+          message: "Enter name of department: "
+      }
+  ]).then(function (answer) {
+      connection.query(
+          "INSERT INTO department SET ?",
+          {
+              name: answer.newDept
+          }
+      );
+        var query = "SELECT * FROM department ";
+      connection.query(query, function(err, res) {
+      if(err)throw err;
+      console.table("All departments: ", res);
+      start();
+      })
   })
 }
 
-function updateEmployeeRole() {
+function newRole() {
+  connection.query("SELECT * FROM department", function(err, res) {
+  if (err) throw err;
 
+  inquirer 
+  .prompt([
+      {
+          name: "newRole",
+          type: "input", 
+          message: "Enter new title: "
+      },
+      {
+          name: "salary",
+          type: "input",
+          message: "Enter salary for this title: "
+      },
+      {
+          name: "department",
+          type: "list",
+          choices: function() {
+              var deptArr = [];
+              for (let i = 0; i < res.length; i++) {
+              deptArr.push(res[i].name);
+              }
+              return deptArr;
+          },
+      }
+  ]).then(function (answer) {
+      let deptId;
+      for (let j = 0; j < res.length; j++) {
+          if (res[j].name == answer.deptChoice) {
+              deptId = res[j].id;
+          }
+      }
+
+      connection.query(
+          "INSERT INTO role SET ?",
+          {
+              title: answer.newRole,
+              salary: answer.salary,
+              deptId: deptId
+          },
+          function (err, res) {
+              if(err)throw err;
+              console.log("Success! Title has been added.");
+              start();
+          }
+      )
+  })
+  })
 }
 
 function allEmpl() {
   let qry = "SELECT "
 
+  // aliases for employees
   qry += "E.id as EmployeeId, "
   qry += "E.firstName as EmployeeFirstName, "
   qry += "E.lastName as EmployeeLastName, "
   qry += "E.mgrId as ManagerId, "
   qry += "E.roleId, "
 
+  // aliases for roles
   qry += "R.deptId, "
   qry += "R.title, "
   qry += "R.salary, "
 
+  // alias for department
   qry += "D.deptName, "
 
+  // aliases for managers
   qry += "M.firstName as ManagerFirstName, "
   qry += "M.lastName as ManagerLastName "
   
@@ -243,5 +298,6 @@ function allDept() {
 }
 
 function exit() {
+  console.log("Exiting application.")
   connection.end()
 }
