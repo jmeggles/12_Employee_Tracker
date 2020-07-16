@@ -10,19 +10,19 @@ VALUES ("Hub Operations"),
 
 -- role info
 INSERT INTO role (title, salary, deptId)
-VALUES ("Handler", 25000.00, 1),
+VALUES ("Manager", 100100.25, 3),
 ("Supervisor", 70500.50, 2),
-("Manager", 100100.25, 3);
+("Handler", 25000.00, 1);
 
 -- employee info
 INSERT INTO employee (firstName, lastName, roleId, mgrId)
-VALUES ("Robert", "Mason", 3, NULL),
+VALUES ("Robert", "Mason", 1, NULL),
 ("Jane", "Duet", 2, 1),
 ("Adam", "Bradley", 2, 1), 
-("Mary", "Gander", 1, 3), 
-("Zack", "Karl", 1, 3),
-("Jillian", "Mullins", 1, 3),
-("Lisa", "Dawn", 1, 2),
-("Curtis", "Jeffery", 1, 2),
-("Steve", "Humperdink", 1, 2),
-("Jon", "Doh", 1, 2);
+("Mary", "Gander", 3, 2), 
+("Zack", "Karl", 3, 2),
+("Jillian", "Mullins", 3, 2),
+("Lisa", "Dawn", 3, 2),
+("Curtis", "Jeffery", 1, NULL),
+("Steve", "Humperdink", 3, 2),
+("Jon", "Doh", 2, 1);

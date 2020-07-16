@@ -34,6 +34,7 @@
   - DBeaver
   - MySQL
   - Control.Table
+  - Express
   - Inquirer
   - Chalk
   - JavScript

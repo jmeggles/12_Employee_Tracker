@@ -113,7 +113,7 @@ function newDepartment() {
           }
         }
       ),
-        console.log(" ....................... SUCCESS! ........................... ");
+      console.log(" ....................... SUCCESS! ........................... ");
       console.table(answer);
       console.log("   ^^^^^^^^^^^^^^^^  New department added ^^^^^^^^^^^^^^^^ ");
       start();
@@ -147,7 +147,7 @@ function newRole() {
           }
         }
       ),
-        console.log(" ....................... SUCCESS! ........................... ");
+      console.log(" ....................... SUCCESS! ........................... ");
       console.table(answer);
       console.log("   ^^^^^^^^^^^^^^^^  New title added ^^^^^^^^^^^^^^^^ ");
       start();
@@ -238,7 +238,8 @@ function allRole() {
   qry += "JOIN department D "
   qry += "ON R.deptId = D.id "
 
-  connection.query(qry, function (error, results) {
+  connection.query("SELECT * FROM role ",
+    function (error, results) {
     if (error) throw error;
     console.table(results);
     start()
@@ -270,6 +271,7 @@ function allEmpl() {
 
   qry += "FROM employee E "
 
+  // joining tables
   qry += "JOIN role R "
   qry += "ON E.roleId = R.id "
 
@@ -279,7 +281,8 @@ function allEmpl() {
   qry += "JOIN employee M "
   qry += "ON E.mgrId = M.id "
 
-  connection.query(qry, function (error, results) {
+  connection.query("SELECT * FROM employee ",
+    function (error, results) {
     if (error) throw error;
     console.table(results);
     start()
@@ -329,7 +332,7 @@ function updateEmployeeRole() {
             }
           }
         ),
-          console.log(" ....................... SUCCESS! ........................... ");
+        console.log(" ....................... SUCCESS! ........................... ");
         console.table(answer);
         console.log("   ^^^^^^^^^^^^^^^^  New title added ^^^^^^^^^^^^^^^^ ");
         start();
