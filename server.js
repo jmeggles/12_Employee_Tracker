@@ -4,11 +4,8 @@ const mysql = require("mysql");
 // to interact with the user
 const inquirer = require("inquirer");
 
-// prints tables to the console
-//console.table = require("console.table");
-
 // prints console info in different colors for better viewing.
-// const chalk = require("chalk");
+const chalk = require("chalk");
 
 // creates the connection
 const connection = mysql.createConnection({
@@ -33,17 +30,7 @@ connection.connect(function (err) {
   start();
 });
 
-// prompts user with the intial question 
-// function start() {
-//   connection.query("SELECT * FROM employees", function (error, results) {
-//     if (error) throw error;
-//     console.table(results);
-
-//     // pending queries are sent and connection is terminated
-//     // connection.end();
-//   });
-// }
-
+// prompts user with the intial question by given a menu to select a query from
 function start() {
   inquirer
     .prompt({
@@ -64,7 +51,7 @@ function start() {
         "Exit"
       ]
     })
-    // depending on which menu list is chosen, the next set of required info will be asked.
+    // depending on which query is chosen, the next set of required info will be asked.
     .then(({ menu }) => {
       switch (menu) {
         // if employee is selected...or...
@@ -110,6 +97,8 @@ function start() {
 // this works when new employee is selected from the menu list.
 // does not save or send info after inputs though. 
 function newEmployee() {
+  let roleArray = [];
+  let mgrArray = [];
   inquirer
     .prompt([
       {
@@ -133,24 +122,54 @@ function newEmployee() {
         message: "Employee's manager's ID?"
       },
     ])
-
-
     //     // answers are written to database
-    .then(({ mgrName, mgrId, mgrEmail, mgrPhone }) => {
-
+    .then(({ roleArrar, mgrArray }) => {
       // collects all inputs
-
       console.table(results);
-
     })
 }
 
 function newDepartment() {
-
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "deptName",
+        message: "Name of new department?"
+      },
+    ])
+    //     // answers are written to database
+    .then(({  }) => {
+      // collects all inputs
+      console.table(results);
+    })
 }
 
 function newRole() {
+  inquirer
+  .prompt([
+    {
+      type: "input",
+      name: "title",
+      message: "Name of role (title)?"
+    },
+    {
+      type: "input",
+      name: "salary",
+      message: "What is the salary for this role?"
+    },
+    {
+      type: "input",
+      name: "deptId",
+      message: "What is the department ID?"
+    },
 
+  ])
+  //     // answers are written to database
+  .then(({ }) => {
+    // collects all inputs
+    console.table(results);
+  })
 }
 
 function updateEmployeeRole() {
