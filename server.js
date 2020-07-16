@@ -38,42 +38,23 @@ function start() {
       type: "list",
       message: "What would you like to do? ",
       choices: [
-        "View all employees",
-        "View all departments",
-        "View all roles",
-        // "View employees by role",
-        // "View employees by department",
-        // "View employees by manager",
-        "Add new employee",
         "Add new department",
         "Add new role",
+        "Add new employee",
+        "View all departments",
+        "View all roles",
+        "View all employees",
         "Update employee role",
+        // Update employee manager",
+        // "View employees by manager",
+        // "View employees by role",
+        // "Delete departments, roles, employees",
         "Exit"
       ]
     })
     // depending on which query is chosen, the next set of required info will be asked.
     .then(({ menu }) => {
       switch (menu) {
-        // if employee is selected...or...
-        case "View all employees":
-          allEmpl();
-          break;
-
-        // if role is selected...or...
-        case "View all roles":
-          allRole();
-          break;
-
-        // if department is selected...or...
-        case "View all departments":
-          allDept();
-          break;
-
-        // if add new empl is selected...or...
-        case "Add new employee":
-          newEmployee();
-          break;
-
         case "Add new department":
           newDepartment();
           break;
@@ -82,6 +63,22 @@ function start() {
           newRole();
           break;
 
+        case "Add new employee":
+          newEmployee();
+          break;
+
+        case "View all roles":
+          allRole();
+          break;
+  
+        case "View all departments":
+          allDept();
+          break;  
+
+        case "View all employees":
+          allEmpl();
+          break;
+    
         case "Update employee role":
           updateEmployeeRole();
           break;
@@ -93,140 +90,221 @@ function start() {
     })
 }
 
-// if add new employee is selected...
-// this works when new employee is selected from the menu list.
-// does not save or send info after inputs though. 
-function newEmployee() {
-  connection.query("SELECT * FROM role", function (err, res) {
-  if (err) throw err;
-  
-  inquirer
-      .prompt([
-          {
-              name: "firstName",
-              type: "input", 
-              message: "Enter employee's fist name: ",
-          },
-          {
-              name: "lastName",
-              type: "input", 
-              message: "Enter employee's last name: "
-          },
-          {
-              name: "role", 
-              type: "list",
-              message: "Select employee's role: ",
-              choices: function() {
-              var emplArr = [];
-              for (let i = 0; i < res.length; i++) {
-                  emplArr.push(res[i].title);
-              }
-              return emplArr;
-              },
-           
-          }
-          ])
-          .then(function (answer) {
-              let roleId;
-              for (let j = 0; j < res.length; j++) {
-              if (res[j].title == answer.role) {
-                  roleId = res[j].id;
-                  console.log(roleId)
-              }                  
-              }  
-              connection.query(
-              "INSERT INTO employee SET ?",
-              {
-                  firstName: answer.firstName,
-                  lastName: answer.lastName,
-                  roleId: roleId,
-              },
-              function (err) {
-                  if (err) throw err;
-                  console.log("Success! Employee added.");
-                  start();
-              }
-              )
-          })
-  })
-}
+//  >>>>>>>>>>>>>>>>>>  ADD  <<<<<<<<<<<<<<<<<<<<<<<  //
 
+// add new department
 function newDepartment() {
   inquirer
-  .prompt([
-      {
-          name: "newDept", 
-          type: "input", 
-          message: "Enter name of department: "
-      }
-  ]).then(function (answer) {
+    .prompt({
+      type: "input",
+      name: "newDept",
+      message: "Enter new department name: ",
+    })
+    .then(function(answer) {
       connection.query(
-          "INSERT INTO department SET ?",
-          {
-              name: answer.newDept
+        "INSERT INTO department SET ?",
+        {
+          deptName: answer.newDept
+        },
+        function(err, answer) {
+          if (err) {
+            throw err;
           }
-      );
-        var query = "SELECT * FROM department ";
-      connection.query(query, function(err, res) {
-      if(err)throw err;
-      console.table("All departments: ", res);
+        }
+      ),
+        console.log("Success! New department added.", answer);
       start();
+    });
+}
+
+// function newDepartment() {
+//   inquirer
+//     .prompt([
+//       {
+//         name: "newDept",
+//         type: "input",
+//         message: "Enter name of department: "
+//       }
+//     ])
+
+
+//     // .then(function (answer) {
+//     //   let deptName;
+//     //   for (let i = 0; i < res.length; i++) {
+//     //     if (res[i].title == answer.department) {
+//     //       deptName = res[i].id;
+//     //       console.log(deptName)
+//     //     }
+//     //   }
+//     //   connection.query("INSERT INTO department SET ?",
+//     //     {
+//     //       deptName: deptName,
+//     //     },
+//     //     function (err) {
+//     //       if (err) throw err;
+//     //       console.log("Success! Department added.");
+//     //       start();
+
+
+
+
+
+//     .then(function (answer) {
+//       connection.query("INSERT INTO department (name) VALUES (?) ",
+//         {
+//           deptName: answer.deptName
+//         }
+//       );      
+//       // var query = "SELECT * FROM department ";
+//       connection.query(query, function (err, res) {
+//         if (err) throw err;
+//         console.table("Success! Added new department. ", res);
+//         start();
+//       })
+//     })
+// }
+
+// add new title/role
+function newRole() {
+  connection.query("SELECT * FROM department", function (err, res) {
+    if (err) throw err;
+
+    inquirer
+      .prompt([
+        {
+          name: "newRole",
+          type: "input",
+          message: "Enter new title: "
+        },
+        {
+          name: "salary",
+          type: "input",
+          message: "Enter salary for this title: "
+        },
+        {
+          name: "department",
+          type: "list",
+          choices: function () {
+            var deptArr = [];
+            for (let i = 0; i < res.length; i++) {
+              deptArr.push(res[i].name);
+            }
+            return deptArr;
+          },
+        }
+      ])
+      .then(function (answer) {
+        let deptId;
+        for (let i = 0; i < res.length; i++) {
+          if (res[i].name == answer.deptChoice) {
+            deptId = res[i].id;
+          }
+        }
+        connection.query("INSERT INTO role SET ?",
+          {
+            title: answer.newRole,
+            salary: answer.salary,
+            deptId: deptId
+          },
+          function (err, res) {
+            if (err) throw err;
+            console.log("Success! Title has been added.");
+            start();
+          }
+        )
       })
   })
 }
 
-function newRole() {
-  connection.query("SELECT * FROM department", function(err, res) {
-  if (err) throw err;
+// add new employee
+function newEmployee() {
+  connection.query("SELECT * FROM role", function (err, res) {
+    if (err) throw err;
 
-  inquirer 
-  .prompt([
-      {
-          name: "newRole",
-          type: "input", 
-          message: "Enter new title: "
-      },
-      {
-          name: "salary",
+    inquirer
+      .prompt([
+        {
+          name: "firstName",
           type: "input",
-          message: "Enter salary for this title: "
-      },
-      {
-          name: "department",
+          message: "Enter employee's fist name: ",
+        },
+        {
+          name: "lastName",
+          type: "input",
+          message: "Enter employee's last name: "
+        },
+        {
+          name: "role",
           type: "list",
-          choices: function() {
-              var deptArr = [];
-              for (let i = 0; i < res.length; i++) {
-              deptArr.push(res[i].name);
-              }
-              return deptArr;
+          message: "Select employee's role: ",
+          choices: function () {
+            var emplArr = [];
+            for (let i = 0; i < res.length; i++) {
+              emplArr.push(res[i].title);
+            }
+            return emplArr;
           },
-      }
-  ]).then(function (answer) {
-      let deptId;
-      for (let j = 0; j < res.length; j++) {
-          if (res[j].name == answer.deptChoice) {
-              deptId = res[j].id;
-          }
-      }
 
-      connection.query(
-          "INSERT INTO role SET ?",
-          {
-              title: answer.newRole,
-              salary: answer.salary,
-              deptId: deptId
-          },
-          function (err, res) {
-              if(err)throw err;
-              console.log("Success! Title has been added.");
-              start();
+        }
+      ])
+      .then(function (answer) {
+        let roleId;
+        for (let j = 0; j < res.length; j++) {
+          if (res[j].title == answer.role) {
+            roleId = res[j].id;
+            console.log(roleId)
           }
-      )
-  })
+        }
+        connection.query("INSERT INTO employee SET ?",
+          {
+            firstName: answer.firstName,
+            lastName: answer.lastName,
+            roleId: roleId,
+          },
+          function (err) {
+            if (err) throw err;
+            console.log("Success! Employee added.");
+            start();
+          }
+        )
+      })
   })
 }
 
+// >>>>>>>>>>>>>>>>>>   VIEW   <<<<<<<<<<<<<<<<<<<<<<<<<< //
+
+// view by department
+function allDept() {
+  connection.query("SELECT * FROM department", function (error, results) {
+    if (error) throw error;
+    console.table(results);
+    start()
+  });
+}
+
+// view by role
+function allRole() {
+  let qry = "SELECT "
+
+  qry += "R.deptId, "
+  qry += "R.title, "
+  qry += "R.salary, "
+
+  qry += "D.deptName "
+
+  qry += "FROM role R "
+
+  qry += "JOIN department D "
+  qry += "ON R.deptId = D.id "
+
+  connection.query(qry, function (error, results) {
+    if (error) throw error;
+    console.table(results);
+    start()
+  });
+}
+
+// view by employee
 function allEmpl() {
   let qry = "SELECT "
 
@@ -248,7 +326,7 @@ function allEmpl() {
   // aliases for managers
   qry += "M.firstName as ManagerFirstName, "
   qry += "M.lastName as ManagerLastName "
-  
+
   qry += "FROM employee E "
 
   qry += "JOIN role R "
@@ -267,37 +345,7 @@ function allEmpl() {
   });
 }
 
-
-function allRole() {
-  let qry = "SELECT "
-
-  qry += "R.deptId, "
-  qry += "R.title, "
-  qry += "R.salary, "
-  
-  qry += "D.deptName "
-  
-  qry += "FROM role R "
-  
-  qry += "JOIN department D "
-  qry += "ON R.deptId = D.id "
-  
-  connection.query(qry, function (error, results) {
-    if (error) throw error;
-    console.table(results);
-    start()
-  });
-}
-
-function allDept() {
-  connection.query("SELECT * FROM department", function (error, results) {
-    if (error) throw error;
-    console.table(results);
-    start()
-  });
-}
-
 function exit() {
-  console.log("Exiting application.")
+  console.log(">>>>>>>>>>   YOU  HAVE  EXITED  THE  APPLICATION  <<<<<<<<<<")
   connection.end()
 }

@@ -19,7 +19,7 @@ INSERT INTO employee (firstName, lastName, roleId, mgrId)
 VALUES ("Robert", "Mason", 3, NULL),
 ("Jane", "Duet", 2, 1),
 ("Adam", "Bradley", 2, 1), 
-("Mary", "Handler", 1, 3), 
+("Mary", "Gander", 1, 3), 
 ("Zack", "Karl", 1, 3),
 ("Jillian", "Mullins", 1, 3),
 ("Lisa", "Dawn", 1, 2),
