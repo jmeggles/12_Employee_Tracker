@@ -291,8 +291,8 @@ function allEmpl() {
 
 function updateEmployeeRole() {
   let allEmpl = [];
-  connection.query("SELECT * FROM employee", function(err, answer) {
-  
+  connection.query("SELECT * FROM employee", function (err, answer) {
+
     for (let i = 0; i < answer.length; i++) {
       let employeeInfo =
         answer[i].id + " " + answer[i].firstName + " " + answer[i].lastName;
@@ -310,10 +310,10 @@ function updateEmployeeRole() {
           name: "updateRole",
           type: "list",
           message: "Select employee's new role: ",
-          choices: ["Manager", "Supervisor"],
+          choices: ["Manager", "Supervisor", "Handler", " "],
         }
       ])
-      .then(function(answer) {
+      .then(function (answer) {
         const updateId = {};
         updateId.employeeId = parseInt(answer.updateEmployeeRole.split(" ")[0]);
         if (answer.newrole === "Manager") {
@@ -321,18 +321,24 @@ function updateEmployeeRole() {
         } else if (answer.newrole === "Supervisor") {
           updateId.roleId = 2;
         }
-        connection.query(
-          "UPDATE employee SET roleId = ? WHERE id = ?",
+        connection.query("UPDATE employee SET roleId = ? WHERE id = ?",
           [updateId.roleId, updateId.roleId],
-          function(err, data) {
-            start();
+
+          function (err) {
+            if (err) {
+              throw err;
+            }
           }
-        );
+        ),
+          console.log(" ....................... SUCCESS! ........................... ");
+        console.table(answer);
+        console.log("   ^^^^^^^^^^^^^^^^  New title added ^^^^^^^^^^^^^^^^ ");
+        start();
       });
   });
 }
 
-
+// >>>>>>>>>>>>>>>>>>>>>>   EXIT   <<<<<<<<<<<<<<<<<<<  //
 function exit() {
   console.log(">>>>>>>>>>   YOU  HAVE  EXITED  THE  APPLICATION  <<<<<<<<<<")
   connection.end()
