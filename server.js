@@ -133,11 +133,10 @@ function newRole() {
         name: "wage",
         type: "input",
         message: "Enter salary for this title: "
-      },
-
+      }
     ])
     .then(function (answer) {
-      connection.query("INSERT INTO department SET ?",
+      connection.query("INSERT INTO role SET ?",
         {
           title: answer.newRole,
           salary: answer.wage,
