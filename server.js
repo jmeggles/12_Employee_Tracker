@@ -341,6 +341,7 @@ function updateEmployeeRole() {
 }
 
 // >>>>>>>>>>>>>>>>>>>>>>   EXIT   <<<<<<<<<<<<<<<<<<<  //
+
 function exit() {
   console.log(">>>>>>>>>>   YOU  HAVE  EXITED  THE  APPLICATION  <<<<<<<<<<")
   connection.end()
