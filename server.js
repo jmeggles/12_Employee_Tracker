@@ -291,8 +291,12 @@ function allEmpl() {
 
 //  >>>>>>>>>>>>>>>>>>>  UPDATE <<<<<<<<<<<<<<<<<<<<<<< //
 
+// updates employee info based on previous adds/inputs (role, department, employee)
 function updateEmployeeRole() {
   let allEmpl = [];
+  let allRole = [];
+
+  // pulls all employee info from database to populate a menu selection
   connection.query("SELECT * FROM employee", function (err, answer) {
 
     for (let i = 0; i < answer.length; i++) {
@@ -300,6 +304,14 @@ function updateEmployeeRole() {
         answer[i].id + " " + answer[i].firstName + " " + answer[i].lastName;
       allEmpl.push(employeeInfo);
     }
+    // pulls all role info from database to populate e menu selection
+    connection.query("SELECT * FROM role", function (err, answer) {
+
+      for (let i = 0; i < answer.length; i++) {
+        let employeeRoleInfo =
+          answer[i].id + " " + answer[i].title;
+        allRole.push(employeeRoleInfo);
+      }
     inquirer
       .prompt([
         {
@@ -312,14 +324,14 @@ function updateEmployeeRole() {
           name: "updateRole",
           type: "list",
           message: "Select employee's new role: ",
-          choices: ["Manager", "Supervisor", "Handler", " "],
+          choices: allRole
         }
       ])
       .then(function (answer) {
         const updateId = {};
         updateId.employeeId = parseInt(answer.updateEmployeeRole.split(" ")[0]);
         if (answer.newrole === "Manager") {
-          updateId.roleId = 3;
+          updateId.roleId = 1;
         } else if (answer.newrole === "Supervisor") {
           updateId.roleId = 2;
         }
@@ -337,6 +349,7 @@ function updateEmployeeRole() {
         console.log("   ^^^^^^^^^^^^^^^^  New title added ^^^^^^^^^^^^^^^^ ");
         start();
       });
+    });
   });
 }
 
