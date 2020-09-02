@@ -16,8 +16,8 @@
   - [Contribute](#Contribute)
 
  ## Links
-  - (https://jmeggles.github.io/12_Employee_Tracker/)
-  - (https://github.com/jmeggles/12_Employee_Tracker)
+  - (https://jmeggles.github.io/Employee_Tracker/)
+  - (https://github.com/jmeggles/Employee_Tracker)
 
  ## Screenshots_and_GIFs 
   - ![Short vid of deployed project](https://media.giphy.com/media/SsqmIahpRQSJrqW2R9/giphy.gif)
