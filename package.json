@@ -1,5 +1,5 @@
 {
-  "name": "12_employee_tracker",
+  "name": "employee_tracker",
   "version": "1.0.0",
   "description": "A solution for managing a company's employees using node, inquirer, and MySQL",
   "main": "server.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jmeggles/12_Employee_Tracker.git"
+    "url": "git+https://github.com/jmeggles/Employee_Tracker.git"
   },
   "keywords": [
     "employee",
@@ -32,9 +32,9 @@
   "author": "Jody Eggleston",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jmeggles/12_Employee_Tracker/issues"
+    "url": "https://github.com/jmeggles/Employee_Tracker/issues"
   },
-  "homepage": "https://github.com/jmeggles/12_Employee_Tracker#readme",
+  "homepage": "https://github.com/jmeggles/Employee_Tracker#readme",
   "dependencies": {
     "chalk": "^4.1.0",
     "console.table": "^0.10.0",
